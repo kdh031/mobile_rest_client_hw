@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements Callback<List<Post>> {
 
         Intent myIntent = new Intent(this,PostView.class);
         myIntent.putExtra("postId",myPostList.get(position).getId());
+        myIntent.putExtra("postUserId",myPostList.get(position).getUserId());
         myIntent.putExtra("postTitle",myPostList.get(position).getTitle());
         myIntent.putExtra("postBody",myPostList.get(position).getBody());
 
@@ -122,9 +123,11 @@ public class MainActivity extends Activity implements Callback<List<Post>> {
             }
             // Lookup view for data population
             TextView tvId = (TextView) convertView.findViewById(R.id.tvId);
+            TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
             TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             // Populate the data into the template view using the data object
             tvTitle.setText(post.getTitle());
+            tvUsername.setText("Username ID: " + post.getUserId());
             tvId.setText(Integer.toString(post.getId()));
             // Return the completed view to render on screen
             return convertView;

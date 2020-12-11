@@ -32,8 +32,10 @@ public class PostView extends Activity implements Callback<List<Comment>>{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
+        //TextView tvPostUsername = (TextView)findViewById(R.id.tvPostUsername);
         TextView tvPostTitle = (TextView)findViewById(R.id.tvPostTitle);
         TextView tvPostBody = (TextView)findViewById(R.id.tvPostBody);
+        //tvPostUsername.setText(this.getIntent().getStringExtra("postUserId"));
         tvPostBody.setText(this.getIntent().getStringExtra("postBody"));
         tvPostTitle.setText(this.getIntent().getStringExtra("postTitle"));
         findViewById(R.id.btnMakeComment).setOnClickListener(new View.OnClickListener() {
@@ -123,9 +125,11 @@ public class PostView extends Activity implements Callback<List<Comment>>{
             }
             // Lookup view for data population
             TextView tvCommentId = (TextView) convertView.findViewById(R.id.tvCommentId);
+            TextView tvCommentUsername = (TextView) convertView.findViewById(R.id.tvCommentUsername);
             TextView tvCommentBody = (TextView) convertView.findViewById(R.id.tvCommentBody);
             // Populate the data into the template view using the data object
             tvCommentId.setText(Integer.toString(comment.getId()));
+            tvCommentUsername.setText("Title placeholder");
             tvCommentBody.setText(comment.getBody());
             // Return the completed view to render on screen
             return convertView;
