@@ -17,7 +17,7 @@ public interface UserAPI {
 
     @POST("users/")
     @FormUrlEncoded
-    Call<Comment> addCommentToPost(@Field("postId") int postId,
+    Call<User> addToUserPage(@Field("postId") int postId,
                                    @Field("name") String name,
                                    @Field("email") String email,
                                    @Field("body") String body);

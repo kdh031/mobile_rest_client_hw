@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.MapView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,14 +29,16 @@ public class PostView extends Activity implements Callback<List<Comment>>{
     ArrayList<Comment> myCommentsList;
     CommentAdapter myCommentsAdapter;
     ListView lvComments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_view);
-        //TextView tvPostUsername = (TextView)findViewById(R.id.tvPostUsername);
+        TextView tvPostUsername = (TextView)findViewById(R.id.tvPostUsername);
         TextView tvPostTitle = (TextView)findViewById(R.id.tvPostTitle);
         TextView tvPostBody = (TextView)findViewById(R.id.tvPostBody);
         //tvPostUsername.setText(this.getIntent().getStringExtra("postUserId"));
+        tvPostUsername.setText("Username placeholder");
         tvPostBody.setText(this.getIntent().getStringExtra("postBody"));
         tvPostTitle.setText(this.getIntent().getStringExtra("postTitle"));
         findViewById(R.id.btnMakeComment).setOnClickListener(new View.OnClickListener() {
@@ -44,8 +47,32 @@ public class PostView extends Activity implements Callback<List<Comment>>{
                 makeNewComment();
             }
         });
+        findViewById(R.id.tvPostUsername).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("POSTVIEW: ", "Clicked here to go to user_layout ");
+                usernameClicked();
+            }
+        });
         startQuery();
 
+    }
+
+    void usernameClicked() {
+        setContentView(R.layout.user_layout);
+        TextView userName = findViewById(R.id.tvUPName);
+        TextView userUsername = findViewById(R.id.tvUPUsername);
+        TextView userEmail = findViewById(R.id.tvUPEmail);
+        TextView userPhone = findViewById(R.id.tvUPPhone);
+        TextView userWebsite = findViewById(R.id.tvUPWebsite);
+        MapView mapView = findViewById(R.id.mvUP);
+        ListView upListView = findViewById(R.id.lvUPPosts);
+        User user = null;
+        userName.setText("user's name changed");
+        userUsername.setText("user's username changed");
+        userEmail.setText("user's email changed");
+        userPhone.setText("user's phone changed");
+        userWebsite.setText("user's website changed");
     }
 
     static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
@@ -104,6 +131,7 @@ public class PostView extends Activity implements Callback<List<Comment>>{
             System.out.println(response.errorBody());
         }
     }
+
 
     @Override
     public void onFailure(Call<List<Comment>> call, Throwable t) {

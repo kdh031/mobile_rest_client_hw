@@ -129,6 +129,7 @@ public class MainActivity extends Activity implements Callback<List<Post>> {
             tvTitle.setText(post.getTitle());
             tvUsername.setText("Username ID: " + post.getUserId());
             tvId.setText(Integer.toString(post.getId()));
+
             // Return the completed view to render on screen
             return convertView;
         }
